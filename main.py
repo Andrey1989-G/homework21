@@ -1,16 +1,29 @@
-# This is a sample Python script.
+from class_request import Capitalize, Request
+from class_shop import Shop
+from class_store import Store
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    print('Начинаем работу. Для выхода ввести "стоп"')
+    command = input('Введите команду')
+    while command != 'стоп':
+        shop = Shop({})
+        store = Store({})
+        if command[0] == 'К':
+            com_story = Capitalize(command).result()
+            store.add(com_story[0], com_story[1])
+            print("товар добавлен на склад")
+            print(f"остаток на складе:")
+            [print(f'{items} {keys}') for keys, items in store.get_items().items()]
+        elif command[0] == 'Д':
+            com_shop = Request(command).result()
+            if com_shop[0] in [i for i in store.get_items()]:
+                shop.add(com_shop[0], com_shop[1])
+                store.remove(com_shop[0], com_shop[1])
+                print("товар добавлен в магазин")
+                print(f"остаток на складе:")
+                [print(f'{items} {keys}') for keys, items in shop.get_items.items()]
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+
+
+

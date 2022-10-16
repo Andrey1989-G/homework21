@@ -6,7 +6,8 @@ class Shop(Store):
     def __init__(self, items: dict, capacity=20):
         super().__init__(items, capacity)
         self.items = items
-        self.capacity = sum([i for i in items.values()])
+        if items:
+            self.capacity = sum([i for i in items.values()])
         if self.capacity < 0 or self.capacity > 20:
             raise ValueError("допустимый объем 20")
         if len(items) > 5 or len(items) < 0:
